@@ -1,0 +1,28 @@
+{
+  "name": "ToolingAPI",
+  "version": "0.0.1",
+  "description": "Create Salesforce IDE in 30 Minutes",
+  "main": "Web.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:ilovenagpur/toolingapi.git"
+  },
+  "keywords": [
+    "Node.Js",
+    "Tooling",
+    "API",
+    "Salesforce"
+  ],
+  "author": "Jitendra Zaa",
+  "license": "MIT",
+  "dependencies": {
+    "logfmt": "~1.1.2",
+    "express": "~4.7.1"
+  },
+  "engines": {
+	    "node": "0.10.x"
+	  }
+}
