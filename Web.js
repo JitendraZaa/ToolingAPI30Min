@@ -5,7 +5,7 @@ var express = require('express'),
 
 var logfmt = require("logfmt");
 
-
+ 
 app.use(logfmt.requestLogger());
 /*app.use(express.static(__dirname + '/client'));*/
 
