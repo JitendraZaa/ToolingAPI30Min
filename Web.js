@@ -5,7 +5,9 @@ var express = require('express'),
 
 var logfmt = require("logfmt");
 
-app.use(express.static(__dirname + '/client'));
+
+app.use(logfmt.requestLogger());
+/*app.use(express.static(__dirname + '/client'));*/
 
 /*
 app.all('/proxy', function(req, res) {
