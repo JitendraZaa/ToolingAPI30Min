@@ -3,7 +3,7 @@ $("#prodBtn").click(prodLogin);
 $("#sandBtn").click(sandLogin);
 
 var apiVersion = 'v30.0',
-    clientId = '3MVG9iTxZANhwHQuSJa6AuCgpr0Lu3QNRNKk4c2FejzTys5Mlp43UeSHBuhWWgRjEUyV6xE7N0GostjR3sRat',
+    clientId = '3MVG9iTxZANhwHQuSJa6AuCgpr0YL.cTaAGjmBiKxN825pW8DgZzxFzI2RPaz5AlIhz.hFdrYIIIaKn4v3y1V',
     loginUrl = 'https://login.salesforce.com/',
     redirectURI = "https://toolingapi.herokuapp.com/oauthcallback.html", 
     proxyURL = 'https://toolingapi.herokuapp.com/proxy/',
