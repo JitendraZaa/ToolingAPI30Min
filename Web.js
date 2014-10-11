@@ -24,6 +24,9 @@ app.all('/proxy', function(req, res) {
 app.get('/' , function(req,res) {
     res.sendfile('views/index.html');
 } ); 
+app.get('/index.html' , function(req,res) {
+    res.sendfile('views/index.html');
+} ); 
 app.get('/index*' , function(req,res) {
     res.sendfile('views/index.html');
 } );  
