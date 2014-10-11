@@ -1,7 +1,7 @@
 var express = require('express'),
     http = require('http'),
     request = require('request'),
-    bodyParser = require('body-parser'),
+    bodyParser = require('body-parser'), 
     app = express();
 
 var logFmt = require("logfmt");
