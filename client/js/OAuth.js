@@ -5,8 +5,8 @@ $("#sandBtn").click(sandLogin);
 var apiVersion = 'v30.0',
     clientId = '3MVG9iTxZANhwHQuSJa6AuCgpr0Lu3QNRNKk4c2FejzTys5Mlp43UeSHBuhWWgRjEUyV6xE7N0GostjR3sRat',
     loginUrl = 'https://login.salesforce.com/',
-    redirectURI = "http://localhost:3000/oauthcallback.html",
-    proxyURL = 'http://localhost:3000/proxy/',
+    redirectURI = "http://toolingapi.herokuapp.com/oauthcallback.html",
+    proxyURL = 'http://toolingapi.herokuapp.com/proxy/',
     client = new forcetk.Client(clientId, loginUrl, proxyURL);
 
  
