@@ -155,8 +155,15 @@ if (forcetk.Client === undefined) {
      * @param [payload=null] payload for POST/PATCH etc
      */
     forcetk.Client.prototype.ajax = function(path, callback, error, method, payload, retry) {
+        addAPICount();
         var that = this;
         var url = this.instanceUrl + '/services/data' + path;
+        
+        //check if path is "complete path" already
+        if(path.match('^https'))
+        {
+            url = path;
+        } 
 
         return $j.ajax({
             type: method || "GET",
@@ -186,6 +193,7 @@ if (forcetk.Client === undefined) {
                 }
                 xhr.setRequestHeader(that.authzHeader, "OAuth " + that.sessionId);
                 xhr.setRequestHeader('X-User-Agent', 'salesforce-toolkit-rest-javascript/' + that.apiVersion);
+                xhr.setRequestHeader('X-Content-Type','application/json' );
             }
         });
     }
@@ -250,7 +258,54 @@ if (forcetk.Client === undefined) {
         request.send();
         
     }
+    
+    
+    /*
+     * Added By Jitendra - Copy of apexrest with few Tweek
+     
+    forcetk.Client.prototype.customAJAX = function(path, callback, error, method, payload, retry,isToolingAPI) {
+        var that = this;
+        var url = path;
+        
+        if(isToolingAPI)
+        {
+            //url = this.instanceUrl + '/services/data/' + this.apiVersion + '/tooling/' + path;
+            url = this.instanceUrl + '/services/data/' + this.apiVersion   + path;
+        }
 
+        return $j.ajax({
+            type: method || "GET",
+            async: this.asyncAjax,
+            url: (this.proxyUrl !== null) ? this.proxyUrl: url,
+            contentType: method == "DELETE"  ? null : 'application/json;charset=UTF-8',
+            cache: false,
+            processData: false,
+            data: payload,
+            success: callback,
+            error: (!this.refreshToken || retry ) ? error : function(jqXHR, textStatus, errorThrown) {
+                if (jqXHR.status === 401) {
+                    that.refreshAccessToken(function(oauthResponse) {
+                        that.setSessionToken(oauthResponse.access_token, null,
+                        oauthResponse.instance_url);
+                        that.ajax(path, callback, error, method, payload, true);
+                    },
+                    error);
+                } else {
+                    error(jqXHR, textStatus, errorThrown);
+                }
+            },
+            dataType: "json",
+            beforeSend: function(xhr) {
+                if (that.proxyUrl !== null) {
+                    xhr.setRequestHeader('SalesforceProxy-Endpoint', url);
+                }
+                xhr.setRequestHeader(that.authzHeader, "OAuth " + that.sessionId);
+                xhr.setRequestHeader('X-User-Agent', 'salesforce-toolkit-rest-javascript/' + that.apiVersion);
+            }
+        });
+    }
+    */
+    
     /*
      * Low level utility function to call the Salesforce endpoint specific for Apex REST API.
      * @param path resource path relative to /services/apexrest

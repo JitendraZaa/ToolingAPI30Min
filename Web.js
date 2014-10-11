@@ -1,23 +1,41 @@
-var express = require("express");
-var logfmt = require("logfmt");
-var app = express();
+var express = require('express'),
+    http = require('http'),
+    request = require('request'),
+    bodyParser = require('body-parser'),
+    app = express();
 
-app.use(logfmt.requestLogger());
-app.use(express.static(__dirname + '/client'));
+var logFmt = require("logfmt");
+
+app.use(express.static(__dirname + '/client')); 
+
+app.use(bodyParser.json());   
+
+app.set('port', process.env.PORT || 3000);
 
 
-app.get('/', function(req, res) {
-  res.send('Hello World!');
+app.all('/proxy', function(req, res) { 
+    
+    var url = req.header('SalesforceProxy-Endpoint');  
+    request({ url: url, method: req.method, json: req.body, 
+                    headers: {'Authorization': req.header('X-Authorization'), 'Content-Type' : 'application/json'}, body:req.body }).pipe(res);    
+    
 });
+ 
+app.get('/' , function(req,res) {
+    res.sendfile('views/index.html');
+} ); 
+app.get('/index*' , function(req,res) {
+    res.sendfile('views/index.html');
+} );  
+ 
+app.get('/oauthcallback.html' , function(req,res) {
+    res.sendfile('views/oauthcallback.html');
+} ); 
+app.get('/Main*' , function(req,res) {
+    res.sendfile('views/Main.html');
+} );
+ 
 
-app.all('/proxy', function(req, res) {
-    var url = req.header('SalesforceProxy-Endpoint');
-    console.log("proxying: " + url);
-    request({ url: url, method: req.method, json: req.body, headers: {'Authorization': req.header('X-Authorization')} }).pipe(res);
-});
-
-
-var port = Number(process.env.PORT || 5000);
-app.listen(port, function() {
-  console.log("Listening on " + port);
+app.listen(app.get('port'), function () {
+    console.log('Express server listening on port ' + app.get('port'));
 });
