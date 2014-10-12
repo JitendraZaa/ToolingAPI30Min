@@ -1,0 +1,7 @@
+{
+  "name": "Salesforce Editor",
+  "description": "Create Salesforce IDE in 30 minutes with the help of REST based Tooling API",
+  "repository": "https://github.com/JitendraZaa/ToolingAPI30Min.git",
+  "logo": "https://github.com/JitendraZaa/ToolingAPI30Min/blob/master/client/Online%20Salesforce%20Editor%20(OSE).png",
+  "keywords": ["Salesforce", "Tooling API", "Heroku", "Nodejs"]
+}
